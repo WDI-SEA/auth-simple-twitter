@@ -1,13 +1,24 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var ejsLayouts = require('express-ejs-layouts');
 
 var app = express();
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/static'));
 
 app.get('/', function(req, res) {
   res.render('index');
+});
+
+app.get('/auth/signup', function(req, res) {
+  res.render('signup');
+});
+
+app.post('/auth/signup', function(req, res) {
+  console.log(req.body);
+  res.send(req.body);
 });
 
 var port = 3000;
