@@ -8,6 +8,9 @@ app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/static'));
 
+var tweetCtrl = require('./controllers/tweet');
+app.use('/tweets', tweetCtrl);
+
 app.get('/', function(req, res) {
   res.render('index');
 });
