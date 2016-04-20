@@ -1,8 +1,13 @@
 var express = require('express');
+var ejsLayouts = require('express-ejs-layouts');
+
 var app = express();
+app.set('view engine', 'ejs');
+app.use(ejsLayouts);
+app.use(express.static(__dirname + '/static'));
 
 app.get('/', function(req, res) {
-  res.send('welcome to twitter');
+  res.render('index');
 });
 
 var port = 3000;
