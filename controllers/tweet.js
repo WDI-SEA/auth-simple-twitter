@@ -3,13 +3,6 @@ var db = require('../models');
 
 var router = express.Router();
 
-var fakeTweets = [
-  {username: 'spock', content: 'live long and prosper'},
-  {username: 'worf', content: 'FIRE!'},
-  {username: 'picard', content: 'engage'},
-  {username: 'picard', content: 'make it so'},
-];
-
 router.get('/', function(req, res) {
 	db.tweet.findAll({
 		include: [db.user]
