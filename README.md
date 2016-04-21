@@ -3,6 +3,11 @@ We're going to build a simple Twitter app that allows users
 to sign up, login, logout, post tweets, have profile pages
 and view one page with everyone's tweets.
 
+Refer to the commit history in this repo to see how it was
+built step-by-step!
+
+https://github.com/WDI-SEA/simple-twitter-solution/commits/master
+
 ## Preparing the Project
 Create a directory to contain the project and initialize a
 git repo.
