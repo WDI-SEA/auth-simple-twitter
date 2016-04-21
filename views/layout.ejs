@@ -10,6 +10,14 @@
   </head>
   <body>
     <div class="container">
+      <% if (typeof alerts !== 'undefined') { %>
+        <% for (key in alerts) { %>
+          <% alerts[key].forEach(function(thisMsg) { %>
+            <div class="alert alert-<%= key %>"><%= thisMsg %></div>
+          <% }); %>
+        <% } %>
+      <% } %>
+
       <% include nav %>
       <%- body %>
     </div>
