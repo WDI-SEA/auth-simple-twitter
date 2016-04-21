@@ -3,7 +3,9 @@
 <h1>All Tweets</h1>
 <% tweets.forEach(function(tweet) { %>
 	<div>
-		<span class="username"><%= tweet.username %></span>
+		<span class="username">
+			<%= tweet.user.username %>
+		</span>
 		<%= tweet.content %>
 	</div>
 <% }); %>

@@ -11,7 +11,12 @@ var fakeTweets = [
 ];
 
 router.get('/', function(req, res) {
-	res.render('tweets', {tweets: fakeTweets});
+	db.tweet.findAll({
+		include: [db.user]
+	}).then(function(tweets) {
+		console.log(tweets);
+		res.render('tweets', {tweets: tweets});
+	});
 });
 
 router.get('/new', function(req, res){
@@ -20,9 +25,18 @@ router.get('/new', function(req, res){
 
 router.post('/', function(req, res){
 	console.log(req.body);
-	fakeTweets.push(req.body);
 
-	res.redirect('/tweets');
+	db.user.find({
+		where: { username: req.body.username}
+	}).then(function(user) {
+		user.createTweet({
+			content: req.body.content
+		}).then(function(tweet) {
+			res.redirect('/tweets');
+		});
+	}).catch(function(err) {
+		res.send(err);
+	});
 });
 
 module.exports = router;
