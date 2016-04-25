@@ -16,25 +16,20 @@ module.exports = function(sequelize, DataTypes) {
         models.user.hasMany(models.tweet);
       },
       authenticate: function(username, password, callback) {
-        console.log("finding", username);
         // find the user in the database
         this.find({where: {username: username}}).then(function(user) {
           // if there's no username with the username then raise a 'no user' error
-          console.log("found user");
           if (!user) callback(null, false);
           // if a user record comes back, compare the password to the hash
           bcrypt.compare(password, user.password, function(err, result) {
             // if there's a database error then raise 'sorry, something went wrong'
             if (err) return callback(err);
             // the passwords match. return the user info
-            console.log("checking passwords")
             if (result) {
-              console.log("password match")
               callback(null, user);
             // otherwise, raise a 'wrong password' error
             // the password is incorrect.
             }  else {
-              console.log("password mismatch")
               callback(null, false);
             }
           })

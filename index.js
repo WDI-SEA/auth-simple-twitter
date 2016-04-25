@@ -52,14 +52,11 @@ app.get('/auth/logout', function(req, res) {
 
 app.post('/auth/signin', function(req, res) {
   // proving we get the username and password
-  console.log("sign in:", req.body);
   var user = req.body.username;
   var pass = req.body.password;
-  console.log("logging in as", user);
   db.user.authenticate(user, pass, function(err, user) {
     // user successfully logged in.
     if (user) {
-      console.log('GOT USER', user.username);
       req.session.userId = user.id;
       req.flash('success', 'Successfully logged in.');
       res.redirect('/tweets');
@@ -72,7 +69,6 @@ app.get('/auth/signup', function(req, res) {
 });
 
 app.post('/auth/signup', function(req, res) {
-  console.log(req.body);
   db.user.findOrCreate({
   	where: {
   		username: req.body.username,
