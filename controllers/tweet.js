@@ -4,6 +4,12 @@ var db = require('../models');
 var router = express.Router();
 
 router.get('/', function(req, res) {
+	if(!req.currentUser) {
+		req.flash('danger', 'You must be logged in to view this page.');
+		res.redirect('/');
+	}
+
+
 	db.tweet.findAll({
 		include: [db.user]
 	}).then(function(tweets) {

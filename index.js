@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 app.use('/tweets', tweetCtrl);
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('index', {alerts: req.flash()});
 });
 
 app.post('/auth/signin', function(req, res) {
