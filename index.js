@@ -27,6 +27,11 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.post('/auth/signin', function(req, res) {
+  // proving we get the username and password
+  console.log("sign in:", req.body);
+});
+
 app.get('/auth/signup', function(req, res) {
   res.render('signup', {alerts: req.flash()});
 });

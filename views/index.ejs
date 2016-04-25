@@ -1,6 +1,12 @@
 <h1>Welcome to Twitter</h1>
 <div class="row">
   <div class="col-xs-12">
+	  <form method="POST" action="/auth/signin">
+	  	<input type="text" name="username">
+	  	<input type="password" name="password">
+	  	<input type="submit" value="Log In">
+	  </form>
+
     <a href="/auth/signup">Sign up</a>
     for an account, log in, or simply browse the firehose.
     And remember, 1 + 1 = <%= 1 + 1 %>
