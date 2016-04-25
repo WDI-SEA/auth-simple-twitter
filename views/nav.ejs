@@ -17,7 +17,9 @@
                 <li><a href="/tweets">Tweets</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/auth/logout">Logout</a></li>
+                <% if (currentUser) { %>
+                    <li><a href="/auth/logout">Logout</a></li>
+                <% } %>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>
