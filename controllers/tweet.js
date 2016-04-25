@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 		include: [db.user]
 	}).then(function(tweets) {
 		console.log(tweets);
-		res.render('tweets', {tweets: tweets});
+		res.render('tweets', {tweets: tweets, alerts: req.flash()});
 	});
 });
 
