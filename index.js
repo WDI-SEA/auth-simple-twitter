@@ -48,7 +48,8 @@ app.post('/auth/signup', function(req, res) {
     	res.redirect('/auth/signup');
   	}
   }).catch(function(err) {
-    res.send(err);
+    req.flash('danger', err.message);
+    res.redirect('/auth/signup')
   });
 });
 
