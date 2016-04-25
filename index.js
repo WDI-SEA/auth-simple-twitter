@@ -44,6 +44,12 @@ app.get('/', function(req, res) {
   res.render('index', {alerts: req.flash()});
 });
 
+app.get('/auth/logout', function(req, res) {
+  req.currentUser = false;
+  res.locals.currentUser = false;
+  res.redirect('/');
+});
+
 app.post('/auth/signin', function(req, res) {
   // proving we get the username and password
   console.log("sign in:", req.body);
