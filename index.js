@@ -14,12 +14,29 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/static'));
+
 app.use(session({
   secret: 'dsalkfjasdflkjgdfblknbadiadsnkl',
   resave: false,
   saveUninitialized: true
 }));
+
 app.use(flash());
+
+app.use(function(req, res, next) {
+  if (req.session.userId) {
+    db.user.findById(req.session.userId).then(function(user) {
+      req.currentUser = user;
+      res.locals.currentUser = user;
+      next();
+    })
+  } else {
+    req.currentUser = false;
+    res.locals.currentUser = false;
+    next();
+  }
+});
+
 
 app.use('/tweets', tweetCtrl);
 
@@ -37,6 +54,7 @@ app.post('/auth/signin', function(req, res) {
     // user successfully logged in.
     if (user) {
       console.log('GOT USER', user.username);
+      req.session.userId = user.id;
       req.flash('success', 'Successfully logged in.');
       res.redirect('/tweets');
     }

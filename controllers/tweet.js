@@ -20,7 +20,7 @@ router.post('/', function(req, res){
 	console.log(req.body);
 
 	db.user.find({
-		where: { username: req.body.username}
+		where: { username: req.currentUser.username}
 	}).then(function(user) {
 		user.createTweet({
 			content: req.body.content
